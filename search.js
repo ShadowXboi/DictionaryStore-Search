@@ -26,3 +26,5 @@ function searchDefinition() {
 
   xhr.send();
 }
+
+//https://shadowxboi.github.io/DictionaryStore-Search/search.html

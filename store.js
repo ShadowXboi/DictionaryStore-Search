@@ -31,3 +31,4 @@ document.getElementById('storeForm').addEventListener('submit', function(event) 
     xhr.send(JSON.stringify({ word, definition }));
   });
   
+  //https://shadowxboi.github.io/DictionaryStore-Search/store.html
