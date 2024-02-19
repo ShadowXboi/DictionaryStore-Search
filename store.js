@@ -80,3 +80,4 @@ function submitWord(event) {
   // Sends the request with the word and definition as payload
   xhr.send(body);
 }
+document.getElementById("storeForm").addEventListener("submit", submitWord);
