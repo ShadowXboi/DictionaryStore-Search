@@ -1,34 +1,85 @@
-// Function to search for a definition
-function searchDefinition() {
-  const searchWord = document.getElementById('searchWord').value.trim();
+// // Function to search for a definition
+// function searchDefinition() {
+//   const searchWord = document.getElementById('searchWord').value.trim();
 
-  // Validate input
-  if (!searchWord) {
-    document.getElementById('result').innerText = 'Please enter a word to search.';
-    return;
+//   // Validate input
+//   if (!searchWord) {
+//     document.getElementById('result').innerText = 'Please enter a word to search.';
+//     return;
+//   }
+
+//   // Send AJAX request
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('GET', `https://jacksoncomp4537lab4-v5i5b.ondigitalocean.app/api/definitions/?word=${encodeURIComponent(searchWord)}`, true);
+
+//   xhr.onload = function() {
+//     if (xhr.status === 200) {
+//       const response = JSON.parse(xhr.responseText);
+//       document.getElementById('result').innerText = response.message;
+//     } else if (xhr.status === 404) {
+//       document.getElementById('result').innerText = `Word '${searchWord}' not found.`;
+//     } else {
+//       document.getElementById('result').innerText = 'Error searching for definition.';
+//     }
+//   };
+
+//   xhr.onerror = function() {
+//     document.getElementById('result').innerText = 'Error searching for definition.';
+//   };
+
+//   xhr.send();
+// }
+
+
+// //https://shadowxboi.github.io/DictionaryStore-Search/search.html
+
+// search.js
+
+function searchWord(event) {
+  event.preventDefault(); // Prevents the default form submission action.
+
+  // Trims whitespace from the input and retrieves the value.
+  let word = document.getElementById("WordFieldSearch").value.trim();
+
+  // Input validation: Ensures the input is not empty and not numeric.
+  if (!word || !isNaN(word)) {
+    document.getElementById('searchResult').textContent = "Error: Please enter a valid word (non-empty, non-numeric).";
+    return; // Stops execution if validation fails.
   }
 
-  // Send AJAX request
+  // Initializes a new XMLHttpRequest object for asynchronous HTTP request.
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `https://jacksoncomp4537lab4-v5i5b.ondigitalocean.app/api/definitions/?word=${encodeURIComponent(searchWord)}`, true);
+  // Configures the request: Method (GET), URL, and asynchronous flag (true by default).
+  xhr.open("GET", `https://jacksoncomp4537lab4-v5i5b.ondigitalocean.app/api/definitions/?word=${word}`);
 
-  xhr.onload = function() {
+  // Defines what happens when the request receives a response.
+  xhr.onload = () => {
+    // Parses the JSON formatted response text.
+    const response = JSON.parse(xhr.responseText);
+    // Selects the element to display the search result.
+    const resultElement = document.getElementById('searchResult');
+
+    // Checks the HTTP status code to determine the result of the request.
     if (xhr.status === 200) {
-      const response = JSON.parse(xhr.responseText);
-      document.getElementById('result').innerText = response.message;
-    } else if (xhr.status === 404) {
-      document.getElementById('result').innerText = `Word '${searchWord}' not found.`;
+      // The request was successful, checks if the word was found.
+      if (response.definition !== undefined) {
+        // Word is found: Displays the definition.
+        resultElement.innerHTML = `Definition: ${response.definition}`;
+      } else {
+        // Word is not found: Displays a message indicating the word is not found.
+        resultElement.textContent = `Word not found.`;
+      }
     } else {
-      document.getElementById('result').innerText = 'Error searching for definition.';
+      // Handles HTTP error responses by displaying the error message.
+      resultElement.textContent = `Error: ${response.message}`;
     }
   };
 
-  xhr.onerror = function() {
-    document.getElementById('result').innerText = 'Error searching for definition.';
+  // Defines what happens in case of an error with the request (network error, etc.).
+  xhr.onerror = () => {
+    document.getElementById('searchResult').textContent = "An error occurred during the request.";
   };
 
+  // Sends the request.
   xhr.send();
 }
-
-
-//https://shadowxboi.github.io/DictionaryStore-Search/search.html
