@@ -1,3 +1,17 @@
+// Function to fetch logs from the server
+function fetchLogs() {
+  fetch('https://jacksoncomp4537lab4-v5i5b.ondigitalocean.app/api/logs')
+    .then(response => response.json())
+    .then(data => {
+      // Display logs in the console
+      console.log("Logs:", data.logs);
+    })
+    .catch(error => console.error('Error fetching logs:', error));
+}
+
+// Call fetchLogs function when the page loads
+fetchLogs();
+
 function searchWord(event) {
   event.preventDefault(); // Prevents the default form submission action.
 
@@ -46,4 +60,7 @@ function searchWord(event) {
   // Sends the request.
   xhr.send();
 }
+
+// Attach the searchWord function to the form submission event
+document.getElementById("searchForm").addEventListener("submit", searchWord);
 
