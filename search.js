@@ -1,17 +1,4 @@
-// Function to fetch logs from the server
-// function fetchLogs() {
-//   fetch('https://jacksoncomp4537lab4-v5i5b.ondigitalocean.app/api/logs')
-//     .then(response => response.json())
-//     .then(data => {
-//       // Display logs in the console
-//       console.log("Logs:", data.logs);
-//     })
-//     .catch(error => console.error('Error fetching logs:', error));
-// }
-
-// Call fetchLogs function when the page loads
-// fetchLogs();
-
+//chat-gpt is used
 function searchWord(event) {
   event.preventDefault(); // Prevents the default form submission action.
 
@@ -27,7 +14,7 @@ function searchWord(event) {
   // Initializes a new XMLHttpRequest object for asynchronous HTTP request.
   const xhr = new XMLHttpRequest();
   // Configures the request: Method (GET), URL, and asynchronous flag (true by default).
-  xhr.open("GET", `https://jacksoncomp4537lab4-v5i5b.ondigitalocean.app/api/definitions/?word=${word}`);
+  xhr.open("GET", `https://shadowxboi.github.io/DictionaryStore-Search/api/definitions/?word=${word}`);
 
   // Defines what happens when the request receives a response.
   xhr.onload = () => {
