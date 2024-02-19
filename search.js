@@ -14,7 +14,7 @@ function searchWord(event) {
   // Initializes a new XMLHttpRequest object for asynchronous HTTP request.
   const xhr = new XMLHttpRequest();
   // Configures the request: Method (GET), URL, and asynchronous flag (true by default).
-  xhr.open("GET", `https://shadowxboi.github.io/DictionaryStore-Search/api/definitions/?word=${word}`);
+  xhr.open("GET", `https://jacksoncomp4537lab4-v5i5b.ondigitalocean.app/api/definitions/?word=${word}`);
 
   // Defines what happens when the request receives a response.
   xhr.onload = () => {
@@ -47,7 +47,3 @@ function searchWord(event) {
   // Sends the request.
   xhr.send();
 }
-
-// Attach the searchWord function to the form submission event
-document.getElementById("searchForm").addEventListener("submit", searchWord);
-
