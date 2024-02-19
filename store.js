@@ -2,7 +2,7 @@ document.getElementById('storeForm').addEventListener('submit', function(event) 
     event.preventDefault();
     
     const word = document.getElementById('word').value.trim();
-    const definition = document.getElementById('defination').value.trim(); 
+    const definition = document.getElementById('definition').value.trim(); 
   
     // Validate Inputs
     if (!word || !definition) {
