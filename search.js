@@ -1,3 +1,4 @@
+// Function to search for a definition
 function searchDefinition() {
   const searchWord = document.getElementById('searchWord').value.trim();
 
@@ -15,8 +16,10 @@ function searchDefinition() {
     if (xhr.status === 200) {
       const response = JSON.parse(xhr.responseText);
       document.getElementById('result').innerText = response.message;
+    } else if (xhr.status === 404) {
+      document.getElementById('result').innerText = `Word '${searchWord}' not found.`;
     } else {
-      document.getElementById('result').innerText = 'Word not found.';
+      document.getElementById('result').innerText = 'Error searching for definition.';
     }
   };
 
@@ -26,5 +29,6 @@ function searchDefinition() {
 
   xhr.send();
 }
+
 
 //https://shadowxboi.github.io/DictionaryStore-Search/search.html

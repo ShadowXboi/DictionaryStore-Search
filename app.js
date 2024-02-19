@@ -30,11 +30,16 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       const newEntry = JSON.parse(body);
 
+      // Log the new entry received
+      console.log('Received new entry:', newEntry);
+
       const existingEntryIndex = dictionary.findIndex(
         (entry) => entry.word === newEntry.word
       );
 
       if (existingEntryIndex !== -1) {
+        // Log if entry already exists
+        console.log(`Entry '${newEntry.word}' already exists`);
         res.writeHead(409, { 'Content-Type': 'application/json' });
         res.end(
           JSON.stringify({
@@ -43,6 +48,8 @@ const server = http.createServer((req, res) => {
         );
       } else {
         dictionary.push(newEntry);
+        // Log the new entry recorded
+        console.log(`New entry recorded: "${newEntry.word}: ${newEntry.definition}"`);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(
           JSON.stringify({
